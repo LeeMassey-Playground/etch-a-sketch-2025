@@ -107,7 +107,7 @@ resetButton.addEventListener('click', () => {
     if (confirmReset) {
         gridSize = 80;
         reset();
-    };
+    }
 });
 
 changeGridSizeButton.addEventListener('click', () => {
