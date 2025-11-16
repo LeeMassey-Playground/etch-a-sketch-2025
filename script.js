@@ -8,6 +8,8 @@ const gridSizeIndicator = document.getElementById('grid-size-indicator');
 let gridSize = 80;
 let mode = 'normal';
 
+let isTouchDrawing = false;
+
 let r = 0;
 let g = 0;
 let b = 0;
@@ -83,7 +85,7 @@ function setOpacity(e) {
     return 1;
 }
 
-function fill(e) {
+function draw(e) {
     const cell = e.target;
     if (cell.classList.contains('cell')) {
 
@@ -91,8 +93,10 @@ function fill(e) {
             return;
         }
 
-        cell.style.backgroundColor = setColor(e);
+        cell.style.backgroundColor = setColor();
         cell.style.opacity = setOpacity(e);
+
+        e.preventDefault();
     }
 }
 
@@ -118,8 +122,30 @@ changeGridSizeButton.addEventListener('click', () => {
     }
 });
 
-container.addEventListener('mouseover', (e) => {
-    fill(e);
+container.addEventListener('mouseover', draw);
+
+container.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        if (!e.target.classList.contains('cell')) return;
+        isTouchDrawing = true;
+        draw(e);            // draw on first touch
+        e.preventDefault(); // stop scroll
+    }
+});
+
+container.addEventListener('pointermove', (e) => {
+    if (!isTouchDrawing) return;
+    if (!e.target.classList.contains('cell')) return;
+    draw(e);
+    e.preventDefault();
+});
+
+['pointerup', 'pointerleave', 'pointercancel'].forEach((eventName) => {
+    container.addEventListener(eventName, (e) => {
+        if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+            isTouchDrawing = false;
+        }
+    });
 });
 
 reset();

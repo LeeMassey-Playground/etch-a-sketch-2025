@@ -126,6 +126,8 @@ h1 {
 
     cursor: crosshair;
     box-sizing: border-box;
+
+    touch-action: none;
 }
 
 .cell {
