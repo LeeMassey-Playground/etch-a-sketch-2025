@@ -33,22 +33,21 @@ function updateIndicators() {
     gridSizeIndicator.textContent = `Grid Size: ${gridSize} x ${gridSize}`;
 }
 
-function renderGrid(gridSize) {
-
+function reset() {
+    mode = 'normal';
+    container.innerHTML = '';
+    renderGrid(gridSize);
     updateIndicators();
+ }
+ 
+ function renderGrid(size) {
     
-    for (let i = 0; i < gridSize * gridSize; i++) {
+    for (let i = 0; i < size * size; i++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         container.appendChild(cell);
-        cell.style.flex = '0 0 ' + (100 / gridSize) + '%';
+        cell.style.flex = '0 0 ' + (100 / size) + '%';
     }
-}
-
-function reset(n = 80) {
-    mode = 'normal';
-    container.innerHTML = '';
-    renderGrid(n);
 }
 
 function setMode(newMode) {
@@ -106,14 +105,16 @@ modeButtons.forEach((button) => {
 resetButton.addEventListener('click', () => {
     let confirmReset = confirm("Are you sure you want to reset the grid?");
     if (confirmReset) {
+        gridSize = 80;
         reset();
     };
 });
 
 changeGridSizeButton.addEventListener('click', () => {
-    gridSize = changeGridSize();
-    if (gridSize !== null) {
-        reset(gridSize);
+    const newGridSize = changeGridSize();
+    if (newGridSize !== null) {
+        gridSize = newGridSize;
+        reset();
     }
 });
 
