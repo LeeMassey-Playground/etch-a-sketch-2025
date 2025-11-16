@@ -13,9 +13,14 @@ let g = 0;
 let b = 0;
 
 function changeGridSize() {
-    let size;
     while (true) {
-        size = Number(prompt('Enter x for grid size = x by x (1 - 128):'));
+        const input = prompt('Enter x for grid size = x by x (1 - 128):');
+
+        if (input === null) {
+            return null;
+        }
+
+        const size = Number(input);
         if (!isNaN(size) && size >= 1 && size <= 128) {
             return size;
         }
@@ -41,10 +46,9 @@ function renderGrid(gridSize) {
 }
 
 function reset(n = 80) {
-    gridSize = n;
     mode = 'normal';
     container.innerHTML = '';
-    renderGrid(gridSize);
+    renderGrid(n);
 }
 
 function setMode(newMode) {
@@ -52,9 +56,9 @@ function setMode(newMode) {
     updateIndicators();
 }
 
-function setColor(e) {;
+function setColor() {;
 
-    if (mode === 'normal') {
+    if (mode === 'normal' || mode === 'shade') {
         r = 0;
         g = 0;
         b = 0;
@@ -64,12 +68,6 @@ function setColor(e) {;
         r = Math.floor(Math.random() * 256);
         g = Math.floor(Math.random() * 256);
         b = Math.floor(Math.random() * 256);
-    }
-
-    if (mode === 'shade') {
-        r = 0;
-        g = 0;
-        b = 0;
     }
 
     return `rgb(${r}, ${g}, ${b})`;
@@ -106,12 +104,17 @@ modeButtons.forEach((button) => {
 });
 
 resetButton.addEventListener('click', () => {
-    reset();
+    let confirmReset = confirm("Are you sure you want to reset the grid?");
+    if (confirmReset) {
+        reset();
+    };
 });
 
 changeGridSizeButton.addEventListener('click', () => {
     gridSize = changeGridSize();
-    reset(gridSize);
+    if (gridSize !== null) {
+        reset(gridSize);
+    }
 });
 
 container.addEventListener('mouseover', (e) => {

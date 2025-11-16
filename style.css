@@ -1,48 +1,98 @@
 body {
-    background-color: lightgray;
+    background-color: #121212;
+    color: #FFFFFF;
     margin: 0 auto;
     padding: 20px;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #323232;
+    border-radius: 10px;
+    background-color: #1E1E1E;
+}
+
+h1 {
+    margin-bottom: 10px;
 }
 
 #indicators-container {
     text-align: center;
+    color: #BFBFBF;
 }
 
 #buttons-container {
     display: flex;
     gap: 10px;
     padding: 20px;
+    background-color: #2F2F2F;
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid #3C3C3C;
 }
 
 #buttons-container button {
     padding: 10px 20px;
-    border: 1px solid #273458;
     border-radius: 5px;
-    background-color: #4760a3;
-    color: white;
     cursor: pointer;
+    border: 1px solid #474747;
+    box-shadow: inset 0 1px 0 #3C3C3C,
+        0 2px 4px rgba(0, 0, 0, 0.45);
+    color: #E6E6E6;
+    font-weight: bold;
 }
 
 #buttons-container button:hover {
-    background-color: #344679;
+    box-shadow: inset 0 1px 0 #5A5A5A,
+        0 3px 6px rgba(0, 0, 0, 0.55);
 }
 
-.active-mode {
-    border: 2px solid #ffcc00 !important;
+#buttons-container button:active {
+    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.5),
+        0 0 0 rgba(0, 0, 0, 0.4);
+    transform: translateY(1px);
+}
+
+.mode-buttons, #change-grid-size-button {
+    background: linear-gradient(#3F7FFF, #0B3A9E);
+}
+
+.mode-buttons:hover, #change-grid-size-button:hover {
+    background: linear-gradient(#0B3A9E, #062663);
+}
+
+.mode-buttons:active, #change-grid-size-button:active {
+    background: linear-gradient(#062663, #021430);
+}
+
+#reset-button {
+    background: linear-gradient(lightcoral, red);
+}
+
+#reset-button:hover {
+    background: linear-gradient(red, darkred);
+}
+
+#reset-button:active {
+    background: linear-gradient(darkred, maroon);
 }
 
 #grid-container {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
+    border: 1px solid #1A1A1A;
     min-width: 600px;
     max-width: 800px;
     aspect-ratio: 1/1;
-    background-color: rgb(158, 228, 255);
+    background-color: #E2E2E2;
 }
 
 .cell {
