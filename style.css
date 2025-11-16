@@ -8,16 +8,43 @@ body {
     flex-direction: column;
 }
 
-#container {
+#indicators-container {
+    text-align: center;
+}
+
+#buttons-container {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+#buttons-container button {
+    padding: 10px 20px;
+    border: 1px solid #273458;
+    border-radius: 5px;
+    background-color: #4760a3;
+    color: white;
+    cursor: pointer;
+}
+
+#buttons-container button:hover {
+    background-color: #344679;
+}
+
+.active-mode {
+    border: 2px solid #ffcc00 !important;
+}
+
+#grid-container {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
     min-width: 600px;
     max-width: 800px;
     aspect-ratio: 1/1;
+    background-color: rgb(158, 228, 255);
 }
 
 .cell {
     aspect-ratio: 1/1;
-    background-color: rgb(158, 228, 255);
 }
