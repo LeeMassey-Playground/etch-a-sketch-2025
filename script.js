@@ -95,9 +95,20 @@ function draw(e) {
 
         cell.style.backgroundColor = setColor();
         cell.style.opacity = setOpacity(e);
-
-        e.preventDefault();
     }
+}
+
+function handlePointerDraw(e) {
+    if (e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
+
+    e.preventDefault();
+
+    const { clientX, clientY } = e;
+    const target = document.elementFromPoint(clientX, clientY);
+
+    if (!target || !target.classList.contains('cell')) return;
+
+    draw({ target });
 }
 
 modeButtons.forEach((button) => {
@@ -126,21 +137,17 @@ container.addEventListener('mouseover', draw);
 
 container.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch' || e.pointerType === 'pen') {
-        if (!e.target.classList.contains('cell')) return;
         isTouchDrawing = true;
-        draw(e);            // draw on first touch
-        e.preventDefault(); // stop scroll
+        handlePointerDraw(e);
     }
 });
 
 container.addEventListener('pointermove', (e) => {
     if (!isTouchDrawing) return;
-    if (!e.target.classList.contains('cell')) return;
-    draw(e);
-    e.preventDefault();
+    handlePointerDraw(e);
 });
 
-['pointerup', 'pointerleave', 'pointercancel'].forEach((eventName) => {
+['pointerup', 'pointercancel', 'pointerleave'].forEach((eventName) => {
     container.addEventListener(eventName, (e) => {
         if (e.pointerType === 'touch' || e.pointerType === 'pen') {
             isTouchDrawing = false;
