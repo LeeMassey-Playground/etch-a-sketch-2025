@@ -1,12 +1,15 @@
 body {
     background-color: #121212;
     color: #FFFFFF;
-    margin: 0 auto;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    padding: 20px 0;
     font-family: 'Inter', sans-serif;
 }
 
@@ -14,10 +17,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    text-align: center;
+
+    width: min(600px, 100% - 2rem);
+    padding: 2rem;
+
+    background-color: #1E1E1E;
     border: 2px solid #323232;
     border-radius: 10px;
-    background-color: #1E1E1E;
+
+    box-sizing: border-box;
 }
 
 h1 {
@@ -31,45 +40,65 @@ h1 {
 
 #buttons-container {
     display: flex;
-    gap: 10px;
-    padding: 20px;
+    justify-content: space-between;
+    
+    width: 100%;
+    margin: 1.5rem 0;
+    padding: 0.75rem;
+    gap: 0.4rem;
+
     background-color: #2F2F2F;
-    margin: 20px;
-    border-radius: 10px;
     border: 1px solid #3C3C3C;
+    border-radius: 10px;
+
+    box-sizing: border-box;
 }
 
 #buttons-container button {
-    padding: 10px 20px;
+    flex: 1 1 0;
+
+    padding: 0.5rem 0.3rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+
+    color: #E6E6E6;
+    border: 1px solid #474747;
     border-radius: 5px;
     cursor: pointer;
-    border: 1px solid #474747;
-    box-shadow: inset 0 1px 0 #3C3C3C,
+
+    box-shadow: 
+        inset 0 1px 0 #3C3C3C,
         0 2px 4px rgba(0, 0, 0, 0.45);
-    color: #E6E6E6;
-    font-weight: bold;
+
+    box-sizing: border-box;
 }
 
 #buttons-container button:hover {
-    box-shadow: inset 0 1px 0 #5A5A5A,
+    box-shadow: 
+        inset 0 1px 0 #5A5A5A,
         0 3px 6px rgba(0, 0, 0, 0.55);
 }
 
 #buttons-container button:active {
-    box-shadow: inset 0 3px 4px rgba(0, 0, 0, 0.5),
+    box-shadow:
+        inset 0 3px 4px rgba(0, 0, 0, 0.5),
         0 0 0 rgba(0, 0, 0, 0.4);
     transform: translateY(1px);
 }
 
-.mode-buttons, #change-grid-size-button {
+.mode-buttons,
+#change-grid-size-button {
     background: linear-gradient(#3F7FFF, #0B3A9E);
 }
 
-.mode-buttons:hover, #change-grid-size-button:hover {
+.mode-buttons:hover,
+#change-grid-size-button:hover {
     background: linear-gradient(#0B3A9E, #062663);
 }
 
-.mode-buttons:active, #change-grid-size-button:active {
+.mode-buttons:active,
+#change-grid-size-button:active {
     background: linear-gradient(#062663, #021430);
 }
 
@@ -88,14 +117,36 @@ h1 {
 #grid-container {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #1A1A1A;
-    min-width: 600px;
-    max-width: 800px;
-    aspect-ratio: 1/1;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
     background-color: #E2E2E2;
+    border: 1px solid #1A1A1A;
+
     cursor: crosshair;
+    box-sizing: border-box;
 }
 
 .cell {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 480px) {
+    #buttons-container {
+        gap: 0.15rem;
+        padding: 0.25rem;
+    }
+
+    #buttons-container button {
+        font-size: 0.65rem;
+        padding: 0.25rem;
+    }
+}
+
+@media (max-width: 360px) {
+    #buttons-container button {
+        font-size: 0.6rem;
+        padding: 0.2rem;
+    }
 }
