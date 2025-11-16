@@ -93,6 +93,7 @@ h1 {
     max-width: 800px;
     aspect-ratio: 1/1;
     background-color: #E2E2E2;
+    cursor: crosshair;
 }
 
 .cell {
